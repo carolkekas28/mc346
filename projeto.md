@@ -54,21 +54,9 @@ após o n-ésimo, renderizar "modo de preparo" automaticamente e listar ingredie
   (<variação> <args...>))
 ```
 
-### Gramática (EBNF simplificada - ilustrativa)
+### Sintaxe
 ```
-program = { definition } ;
-definition = recipe-def | modification-def | presentation ;
-recipe-def = "(define-recipe" IDENT { step } ")" ;
-step = "(step" { TEXT | ingredient } ")" ;
-ingredient = "(ingredient" STRING ")" ;
-modification-def = "(define-modification" IDENT "(" mod-var ")" ")" ;
-mod-var = add-end | add-start | add-after ;
-add-end = "add-step-to-end" step ;
-add-start = "add-step-to-start" step ;
-add-after = "add-step-after" NUMBER step ;
-presentation = "(create-recipe" STRING expr ")" ;
-expr = IDENT | presentation | application ;
-application = "(" IDENT expr ")" ; (* composição de transformações *)
+(EM CONSTRUÇÃO)
 ```
 
 ### Semântica (resumo)
