@@ -13,6 +13,7 @@ após o n-ésimo, renderizar "modo de preparo" automaticamente e listar ingredie
 
 ## Slides
 
+[Link para acessar os nossos slides.](https://docs.google.com/presentation/d/1QNMO3aChWYS85rvfX5D0YxKlk1Zj9BUbQlnRaAwpRmQ/edit?usp=sharing)
 > Coloque aqui o link para o PDF da apresentação.
 
 ## Notebook
@@ -55,9 +56,42 @@ após o n-ésimo, renderizar "modo de preparo" automaticamente e listar ingredie
 ```
 
 ### Sintaxe
-```
-(EM CONSTRUÇÃO)
-```
+
+#### Macro 1 - `define-recipe`
+
+Usada para criar uma receita base nomeada, que é uma coleção de passos de preparo. 
+
+| Macro  | Sintaxe | Elementos principais | Descrição |
+| ------------- | ------------- | ------------- | ------------- |
+| `define-recipe` | `(define-recipe NOME_DA_RECEITA PASSO_1 PASSO_2 ...)` | `NOME_DA_RECEITA` - símbolo (ex: `bolo`, `torta`) <br> `PASSO_N` - expressão `step` | Declara uma receita base nomeada como uma sequência de passos de preparo. |
+##### Estrutura interna de um passo - `step` e `ingredient`
+| Construção  | Sintaxe | Elementos | Descrição |
+| ------------- | ------------- | ------------- | ------------- |
+| `step` | `(step ELEMENTO_1 ELEMENTO_2 ...)` | `ELEMENTO_N` ∈ {string, `ingredient`} | Passo do modo de preparo. Permite misturar texto literal com ingredientes marcados. |
+| `ingredient` | `(ingredient "TEXTO")` | "TEXTO" | Marca um ingrediente específico que será extraído e consolidado na lista final. |
+
+#### Macro 2 - `define-modification`
+
+Usada para criar uma função de modificação nomeada. Essa função aceita uma receita e retorna uma nova receita modificada.
+
+| Macro  | Sintaxe | Elementos principais | Descrição |
+| ------------- | ------------- | ------------- | ------------- |
+| `define-modification` | `(define-modification NOME_DA_MOD (AÇÃO ARGUMENTOS))` | `NOME_DA_MOD` - símbolo (ex: `de-cenoura`) <br> `AÇÃO` - uma das ações de modificação do passo | Cria uma função de modificação nomeada que recebe uma receita e retorna uma nova receita modificada (imutável). |
+##### Ações de modificação de passo
+| Ação  | Sintaxe | Descrição |
+| ------------- | ------------- | ------------- |
+| `add-step-to-start` | `(add-step-to-start (step ...))` | Adiciona o novo passo no início da lista de passos. |
+| `add-step-to-end` | `(add-step-to-end (step ...))` | Adiciona o novo passo no fim da lista de passos. |
+| `add-step-after` | `(add-step-after ÍNDICE (step ...))` | Adiciona o novo passo após o passo na posição `ÍNDICE` (indexação começando em 1). |
+
+
+#### Macro 3 - `create-recipe`
+
+Usada para compor a receita final (aplicando modificações) e imprimi-la com a lista de ingredientes e o modo de preparo numerado. 
+
+| Macro  | Sintaxe | Elementos principais | Descrição |
+| ------------- | ------------- | ------------- | ------------- |
+| `create-recipe` | `(create-recipe "TÍTULO" COMPOSIÇÃO_FUNCIONAL` | `TÍTULO` - string visível <br> `COMPOSIÇÃO_FUNCIONAL` - expressão que aplica mods à receita base | Compõe a receita final (aplica as modificações) e imprime lista de ingredientes e modo de preparo numerado. |
 
 ### Semântica (resumo)
 - **Modelo de execução**:
