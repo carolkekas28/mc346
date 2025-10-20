@@ -14,7 +14,6 @@ após o n-ésimo, renderizar "modo de preparo" automaticamente e listar ingredie
 ## Slides
 
 [Link para acessar os nossos slides.](https://docs.google.com/presentation/d/1QNMO3aChWYS85rvfX5D0YxKlk1Zj9BUbQlnRaAwpRmQ/edit?usp=sharing)
-> Coloque aqui o link para o PDF da apresentação.
 
 ## Notebook
 
